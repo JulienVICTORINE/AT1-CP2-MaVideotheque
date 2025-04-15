@@ -14,9 +14,13 @@ const btnNoteDesc = document.querySelector("#btnNoteDesc");
 const inputMovieRange = document.querySelector("#inputMovieRange");
 const displayMovieRange = document.querySelector("#displayMovieRange");
 
+// je récupère l'id pour pouvoir filtrer et afficher le nom d'un film
+const inputMovieName = document.querySelector("#inputMovieName");
+
 var movies = [];
 var sortMethod = "";
 var numberOfMovies = 12;
+var filter = "";
 
 const fetchMovies = async () => {
   const request = await fetch(url);
@@ -40,14 +44,27 @@ const updateMain = () => {
 
   // On trie les films filtrés
   filteredMovies.sort((a, b) => {
-    if (sortMethod == "az") return a.title.localeCompare(b.title);
-    else if (sortMethod == "za") return b.title.localeCompare(a.title);
-    else if (sortMethod == "noteAsc") return a.rt_score - b.rt_score;
-    else if (sortMethod == "noteDesc") return b.rt_score - a.rt_score;
+    if (sortMethod == "az") {
+      return a.title.localeCompare(b.title);
+    } else if (sortMethod == "za") {
+      return b.title.localeCompare(a.title);
+    } else if (sortMethod == "noteAsc") {
+      return a.rt_score - b.rt_score;
+    } else if (sortMethod == "noteDesc") {
+      return b.rt_score - a.rt_score;
+    }
   });
 
   // On extrait une portion des films que l'on veut affiche avec le range
   filteredMovies = filteredMovies.slice(0, numberOfMovies);
+
+  // On filtre les films pour pouvoir effectuer une recherche par son titre
+  filteredMovies = filteredMovies.filter((movie) => {
+    if (filter != "") {
+      return movie.title.toLowerCase().includes(filter.toLocaleLowerCase());
+    }
+    return movie;
+  });
 
   // On affiche les films
   filteredMovies.map((movie) => {
@@ -97,5 +114,13 @@ btnNoteDesc.addEventListener("click", () => {
 inputMovieRange.addEventListener("input", (e) => {
   displayMovieRange.innerHTML = e.target.value;
   numberOfMovies = e.target.value;
+  updateMain();
+});
+
+/////////////////
+// pour filter les noms des films
+////////////////
+inputMovieName.addEventListener("input", (e) => {
+  filter = e.target.value;
   updateMain();
 });
