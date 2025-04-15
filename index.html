@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ghibli Movies</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Ghibli Movies</h1>
+
+      <div>
+        <input
+          type="text"
+          name="movieName"
+          id="inputMovieName"
+          placeholder="Titre du film"
+        />
+      </div>
+
+      <div>
+        <button>A-Z</button>
+        <button>Z-A</button>
+        <button>Note +</button>
+        <button>Note -</button>
+      </div>
+
+      <div class="rangeContainer">
+        <input
+          type="range"
+          name="inputMovieRange"
+          id="inputMovieRange"
+          min="0"
+          max="50"
+          step="1"
+          value="12"
+        />
+        <span id="displayMovieRange">12</span>
+      </div>
+    </header>
+
+    <main>
+      <div class="card">
+        <img src="images/Doomsday-by-VISCOM.jpg" alt="image du film" />
+        <h3>Avengers : Doomsday</h3>
+        <p>Note : 5/5</p>
+        <p>Le meilleur film le plus attendu</p>
+      </div>
+    </main>
+  </body>
+</html>

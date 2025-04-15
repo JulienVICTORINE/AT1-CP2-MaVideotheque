@@ -1,0 +1,57 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: black;
+  color: white;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 20px;
+  input[type="text"],
+  button {
+    padding: 10px 15px;
+  }
+  #displayMovieRange {
+    margin-left: 10px;
+  }
+}
+
+main {
+  padding: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+
+  img {
+    width: 200px;
+    height: 300px;
+  }
+
+  .card {
+    padding: 10px 15px;
+    border: 2px solid white;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+
+    p {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-align: center;
+    }
+  }
+}
