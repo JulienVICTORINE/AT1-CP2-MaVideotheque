@@ -47,7 +47,7 @@ const updateMain = () => {
         <div class="card">
             <img src="${movie.image}" alt="image du film ${movie.title}" />
             <h3>${movie.title}</h3>
-            <p>Note : ${movie.rt_score} (${movie.rt_score / 20}) / 5</p>
+            <p>Note : ${movie.rt_score / 20} / 5</p>
             <p>${movie.description}</p>
         </div>
         `;
