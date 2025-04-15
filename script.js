@@ -10,8 +10,13 @@ const btnZa = document.querySelector("#btnSortZa");
 const btnNoteAsc = document.querySelector("#btnNoteAsc");
 const btnNoteDesc = document.querySelector("#btnNoteDesc");
 
+// je récupère l'id du bouton range pour extraire une portion des films
+const inputMovieRange = document.querySelector("#inputMovieRange");
+const displayMovieRange = document.querySelector("#displayMovieRange");
+
 var movies = [];
 var sortMethod = "";
+var numberOfMovies = 12;
 
 const fetchMovies = async () => {
   const request = await fetch(url);
@@ -22,7 +27,7 @@ const fetchMovies = async () => {
 // J'affiche tous les données
 const updateMain = () => {
   main.innerHTML = ""; // je vide le main
-  let filteredMovies = [...movies]; // je fais une copie
+  let filteredMovies = [...movies]; // je fais une copie pour permettre de filtrer, extraire et trier les films
 
   // Appliquer un filtre selon le bouton cliqué
   if (sortMethod === "noteAsc") {
@@ -41,6 +46,9 @@ const updateMain = () => {
     else if (sortMethod == "noteDesc") return b.rt_score - a.rt_score;
   });
 
+  // On extrait une portion des films que l'on veut affiche avec le range
+  filteredMovies = filteredMovies.slice(0, numberOfMovies);
+
   // On affiche les films
   filteredMovies.map((movie) => {
     main.innerHTML += `
@@ -57,7 +65,7 @@ const updateMain = () => {
 fetchMovies();
 
 // je créé un événeemnt pour mes boutons
-///////////////////
+////////////////////
 // Pour afficher les films dans l'ordre croissant ou décroissant
 ///////////////////
 btnAz.addEventListener("click", () => {
@@ -80,5 +88,14 @@ btnNoteAsc.addEventListener("click", () => {
 
 btnNoteDesc.addEventListener("click", () => {
   sortMethod = "noteDesc";
+  updateMain();
+});
+
+///////////////////
+// pour extraire une portion des films
+//////////////////
+inputMovieRange.addEventListener("input", (e) => {
+  displayMovieRange.innerHTML = e.target.value;
+  numberOfMovies = e.target.value;
   updateMain();
 });
